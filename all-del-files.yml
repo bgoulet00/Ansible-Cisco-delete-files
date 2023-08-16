@@ -1,0 +1,30 @@
+---
+# This script will delete a file on a Cisco IOS device
+#
+- name: delete file from bootflash
+  hosts: all
+  connection: local
+  gather_facts: no
+  
+  # Modify this value for the file you want to delete
+  vars:
+    filename: "isr4300-universalk9.16.07.01.SPA.bin"
+
+    
+  tasks: 
+
+
+  - name: delete file
+    ios_command:
+      commands:
+      - command: "delete bootflash:{{filename}}"
+        check_all: True
+        prompt:
+        - ']?'
+        - '[confirm]'
+        answer:
+        - '{{filename}}'
+        - 'y'
+      
+
+   
